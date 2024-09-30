@@ -1,0 +1,470 @@
+<html><head><base href="https://example.com/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Menus Équilibrés - Cuisine Saine et Délicieuse</title><style>
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://source.unsplash.com/1920x1080/?healthy,food,recipe');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.menu-item {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+}
+
+.menu-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover .menu-image {
+    transform: scale(1.1);
+}
+
+.menu-info {
+    padding: 15px;
+}
+
+h2 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.2em;
+}
+
+.menu-description {
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+.load-more {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#loadMoreBtn {
+    background-color: #2ecc71;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#loadMoreBtn:hover {
+    background-color: #27ae60;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.favorite-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.favorite-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #e74c3c;
+    stroke-width: 2;
+    transition: fill 0.3s ease;
+}
+
+.favorite-btn.active svg {
+    fill: #e74c3c;
+}
+
+#favoritesList {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 300px;
+    z-index: 1000;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#favoritesList h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+#favoritesList ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#favoritesList li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+#favoritesList li:last-child {
+    border-bottom: none;
+}
+
+#favoritesList a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+#favoritesList a:hover {
+    text-decoration: underline;
+}
+
+#toggleFavorites {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1001;
+}
+
+#toggleFavorites:hover {
+    background-color: #c0392b;
+}
+
+#ingredientSearch {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#ingredientSearch h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+#ingredientInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#searchBtn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#searchBtn:hover {
+    background-color: #2980b9;
+}
+
+#searchResults {
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+</style></head><body>
+    <div class="content-wrapper">
+        <h1>Menus Équilibrés - Cuisine Saine et Délicieuse</h1>
+        
+        <div id="ingredientSearch">
+            <h2>Rechercher une recette par ingrédients</h2>
+            <input type="text" id="ingredientInput" placeholder="Entrez vos ingrédients séparés par des virgules">
+            <button id="searchBtn">Rechercher</button>
+            <div id="searchResults" class="hidden"></div>
+        </div>
+        
+        <div class="menu-grid" id="menuGrid">
+            <!-- Le contenu sera généré dynamiquement par JavaScript -->
+        </div>
+        <div class="load-more">
+            <button id="loadMoreBtn">Charger plus de menus</button>
+        </div>
+    </div>
+
+    <button id="toggleFavorites">❤</button>
+    <div id="favoritesList" style="display: none;">
+        <h3>Mes Favoris</h3>
+        <ul id="favoritesListItems"></ul>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuGrid = document.getElementById('menuGrid');
+    const favoritesListItems = document.getElementById('favoritesListItems');
+    const toggleFavoritesBtn = document.getElementById('toggleFavorites');
+    const favoritesList = document.getElementById('favoritesList');
+    const ingredientInput = document.getElementById('ingredientInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const searchResults = document.getElementById('searchResults');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    let currentPage = 1;
+
+    function updateFavoritesList() {
+        favoritesListItems.innerHTML = '';
+        favorites.forEach(fav => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <a href="${fav.link}">${fav.title}</a>
+                <button class="remove-favorite" data-id="${fav.id}">Supprimer</button>
+            `;
+            favoritesListItems.appendChild(li);
+        });
+
+        document.querySelectorAll('.remove-favorite').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = e.target.dataset.id;
+                removeFavorite(id);
+            });
+        });
+    }
+
+    function toggleFavorite(menuItem) {
+        const id = menuItem.dataset.id;
+        const title = menuItem.querySelector('h2').textContent;
+        const link = menuItem.querySelector('.btn').href;
+        const index = favorites.findIndex(fav => fav.id === id);
+
+        if (index === -1) {
+            favorites.push({ id, title, link });
+            menuItem.querySelector('.favorite-btn').classList.add('active');
+        } else {
+            favorites.splice(index, 1);
+            menuItem.querySelector('.favorite-btn').classList.remove('active');
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        updateFavoritesList();
+    }
+
+    function removeFavorite(id) {
+        favorites = favorites.filter(fav => fav.id !== id);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        updateFavoritesList();
+
+        const menuItem = document.querySelector(`.menu-item[data-id="${id}"]`);
+        if (menuItem) {
+            menuItem.querySelector('.favorite-btn').classList.remove('active');
+        }
+    }
+
+    function createMenuItemElement(menu) {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'menu-item';
+        menuItem.dataset.id = menu.id;
+        menuItem.innerHTML = `
+            <img src="${menu.image}" alt="${menu.alt}" class="menu-image" width="250" height="180">
+            <button class="favorite-btn" aria-label="Ajouter aux favoris">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </button>
+            <div class="menu-info">
+                <h2>${menu.title}</h2>
+                <p class="menu-description">${menu.description}</p>
+                <a href="/recettes/${menu.slug}?ingredients=true&preparation=true" class="btn">Voir la recette</a>
+            </div>
+        `;
+
+        const favBtn = menuItem.querySelector('.favorite-btn');
+        favBtn.addEventListener('click', () => toggleFavorite(menuItem));
+
+        if (favorites.some(fav => fav.id === menu.id.toString())) {
+            favBtn.classList.add('active');
+        }
+
+        menuItem.addEventListener('mouseenter', () => {
+            menuItem.querySelector('.menu-image').style.transform = 'scale(1.1)';
+        });
+        
+        menuItem.addEventListener('mouseleave', () => {
+            menuItem.querySelector('.menu-image').style.transform = 'scale(1)';
+        });
+
+        return menuItem;
+    }
+
+    function loadRandomMenus(count = 10) {
+        fetch(`/api/random-menus?count=${count}`)
+            .then(response => response.json())
+            .then(data => {
+                menuGrid.innerHTML = ''; // Clear existing menus
+                data.forEach(menu => {
+                    const menuItem = createMenuItemElement(menu);
+                    menuGrid.appendChild(menuItem);
+                });
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement des menus aléatoires:', error);
+            });
+    }
+
+    function loadMoreMenus() {
+        currentPage++;
+        fetch(`/api/menus?page=${currentPage}`)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(menu => {
+                    const menuItem = createMenuItemElement(menu);
+                    menuGrid.appendChild(menuItem);
+                });
+
+                if (data.length < 6) {
+                    loadMoreBtn.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement des menus supplémentaires:', error);
+            });
+    }
+
+    function searchByIngredients(ingredients) {
+        fetch(`/api/search?ingredients=${ingredients}`)
+            .then(response => response.json())
+            .then(data => {
+                searchResults.innerHTML = '';
+                if (data.length === 0) {
+                    searchResults.innerHTML = '<p>Aucune recette trouvée avec ces ingrédients.</p>';
+                } else {
+                    data.forEach(recipe => {
+                        const recipeElement = createMenuItemElement(recipe);
+                        searchResults.appendChild(recipeElement);
+                    });
+                }
+                searchResults.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Erreur lors de la recherche de recettes:', error);
+                searchResults.innerHTML = '<p>Une erreur est survenue lors de la recherche. Veuillez réessayer.</p>';
+                searchResults.classList.remove('hidden');
+            });
+    }
+
+    // Chargement initial des menus aléatoires
+    loadRandomMenus();
+
+    // Événements
+    toggleFavoritesBtn.addEventListener('click', () => {
+        favoritesList.style.display = favoritesList.style.display === 'none' ? 'block' : 'none';
+    });
+
+    loadMoreBtn.addEventListener('click', loadMoreMenus);
+
+    searchBtn.addEventListener('click', () => {
+        const ingredients = ingredientInput.value.trim();
+        if (ingredients) {
+            searchByIngredients(ingredients);
+        } else {
+            alert('Veuillez entrer au moins un ingrédient.');
+        }
+    });
+
+    ingredientInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            searchBtn.click();
+        }
+    });
+
+    updateFavoritesList();
+
+    // Fonction pour changer l'image de fond aléatoirement
+    function changeBackgroundImage() {
+        const keywords = ['healthy', 'food', 'recipe', 'cuisine', 'vegetables', 'fruits', 'cooking'];
+        const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)];
+        const newImageUrl = `https://source.unsplash.com/1920x1080/?${randomKeyword}`;
+        document.body.style.backgroundImage = `url('${newImageUrl}')`;
+    }
+
+    // Changer l'image de fond toutes les 5 minutes
+    setInterval(changeBackgroundImage, 5 * 60 * 1000);
+});
+</script>
+</body></html>
